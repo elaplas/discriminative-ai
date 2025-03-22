@@ -42,6 +42,7 @@ class Classifier(nn.Module):
             # Block 1: 1x28x28 ->32x28x28
             nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, stride=1, padding=1),
             nn.BatchNorm2d(32),
+            ## LeakyReLU (0.1) instead of regular ReLU for better gradient flow
             nn.LeakyReLU(0.1),
             # Block 2: 32x28x28 -> 32x28x28
             nn.Conv2d(in_channels=32, out_channels=32, kernel_size=3, stride=1, padding=1),

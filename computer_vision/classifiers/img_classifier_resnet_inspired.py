@@ -67,11 +67,11 @@ class Classifier(nn.Module):
         self.conv_layers = nn.Sequential(
             # Block 1: 1x28x28 -> 16x28x28
             ResidualBlock(in_channels=1, out_channels=16, stride=1),
-            # Block 2: 16x28x28 -> 32x14x14
+            # Block 2: 16x28x28 -> 32x28x28
             ResidualBlock(in_channels=16, out_channels=32, stride=1),
-            # Block 3: 32x14x14 -> 64x14x14
+            # Block 3: 32x28x28 -> 64x28x28
             ResidualBlock(in_channels=32, out_channels=64, stride=1),
-            # Block 4: 64x14x14-> 128x7x7
+            # Block 4: 64x28x28-> 128x14x14 (Replaced max pooling with strided convolutions for learnable downsampling)
             ResidualBlock(in_channels=64, out_channels=128, stride=2)
         )
 
