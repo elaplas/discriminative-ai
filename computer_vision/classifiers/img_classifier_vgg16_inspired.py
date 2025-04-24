@@ -64,7 +64,7 @@ class Classifier(nn.Module):
         )
 
         self.fc = nn.Sequential(
-            # Reduce to 512x1x1
+            # Reduce to 128x1x1
             nn.AdaptiveAvgPool2d(1), 
             nn.Flatten(), 
             nn.Linear(128, num_classes)
@@ -107,7 +107,7 @@ print(y)
 
 # Config training
 loss_fn = nn.CrossEntropyLoss()
-optimizer = optim.Adam(model.parameters(), lr=learning_rate) 
+optimizer = optim.AdamW(model.parameters(), lr=learning_rate) 
 
 for i in range(num_epochs):
     for x_batch, y_batch in train_loader:
@@ -123,7 +123,7 @@ for i in range(num_epochs):
         print(f"epoch: {i}, training accuracy: {cal_accuracy(prediction, y_batch)}")
 
         # Reduce learning rate after 10 epochs 
-        if (i != 0 and i%10 == 0):
+        if (i != 0 and i%2 == 0):
             for param_group in optimizer.param_groups:
                 param_group['lr'] *= 0.1
     
