@@ -47,7 +47,7 @@ class Mobilenet28(nn.Module):
             nn.Linear(1024, num_classes)
         )
 
-        self.softmax = nn.Softmax(dim=1)
+        self.softmax = nn.Softmax(dim=0)
 
     def forward(self, X):
         Y = self.conv_blocks(X)
